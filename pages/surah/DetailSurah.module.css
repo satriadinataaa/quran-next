@@ -1,0 +1,73 @@
+.arab{
+ font-size: 40px;
+ text-align:right;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.baca{
+  font-size: 18px;
+  text-align:left;
+  border-bottom: 2px solid   #f0e9e9    ;
+  padding-bottom: 1em;
+   
+}
+
+.title{
+  text-align: center;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.tafsir{
+  text-align: justify;
+}
+
+.audioBar{
+  width:100%
+}
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.child {
+  width: calc(50% - 10px);
+  margin-left: 10px;
+  margin-top: 10px;
+ 
+  
+}
+
+.child70 {
+  width: calc(70% - 10px);
+  margin-left: 10px;
+  margin-top: 10px;
+ 
+}
+
+.child30 {
+  width: calc(30% - 10px);
+  margin-left: 10px;
+  margin-top: 10px;
+ 
+}
+.select {
+
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+.p1{
+  padding-left: 1em;
+  padding-right: 1em;
+
+}
