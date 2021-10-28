@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 
 import Header from '../../components/Header'
 import React, {ChangeEvent, FormEvent, useState,useEffect } from "react";
