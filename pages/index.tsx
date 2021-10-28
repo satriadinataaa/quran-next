@@ -29,7 +29,7 @@ const Home: NextPage = () => {
            let id = surah.number;
           return(
           
-          <li key={id} className={styles['list','child']}>
+          <li key={id} className={`${styles.list} ${styles.child}`}>
             
             <Link href={`/surah/${id}?imamId=4`} >
               <a className={styles.link}><span className={styles.ayah}>{surah.asma.ar.long}</span> - ({surah.asma.en.long}) - ({surah.ayahCount} Ayat) </a>
