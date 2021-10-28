@@ -25,7 +25,7 @@ const Home: NextPage = () => {
       <div>
         <h1 className={styles['title-homepage']}>Welcome Bro</h1>
         
-        {Waiting ? <p>Bentar</p> : <ul className={styles.container}>{ListSurah.map(surah => {
+        {Waiting ? <p>Bentar</p> : <ul className={`${styles.container} ${styles.listmaster}`}>{ListSurah.map(surah => {
            let id = surah.number;
           return(
           

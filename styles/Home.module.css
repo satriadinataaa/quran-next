@@ -3,7 +3,8 @@
 }
 
 .link{
-  font-family:  sans-serif
+  font-family:  sans-serif;
+
 }
 
 .ayah{
@@ -23,7 +24,11 @@
 
 .child {
   width: calc(50% - 10px);
-  margin-left: 10px;
+ 
   margin-top: 10px;
  
+}
+
+.listmaster{
+  list-style-type: none;
 }
