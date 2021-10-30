@@ -12,37 +12,45 @@ export default function detail({postData,postDataImam}) {
   const [idSurah, setidSurah] = useState("")
   const router = useRouter();
   const [selectedImam,setSelectedImam] = useState("");
-  
+  const imamId = router.query.imamId;
+
+  let bismillah = (postData.preBismillah) ? postData.preBismillah.text.ar : '';
   return (
     < >
         <Header />
         <div className={styles.p1}>
-        <h3 className={styles.title}>{postData.asma.id.long} - {postData.asma.translation.id} - {postData.ayahCount} Ayat </h3>
+        <h3 className={styles.title}>{postData.asma.id.long} - {postData.asma.translation.id} - {postData.ayahCount} Ayat - {postData.type.id} </h3>
 
         <h5 className={styles.tafsir}>{postData.tafsir.id}</h5>
         <audio className={styles.audioBar} src={postData.recitation.full} controls />
         <div className={styles.container}>
-          <select  className={styles.child70} id="selectedImam" onChange={e => setSelectedImam(e.target.value)} >
-          <option>Pilih Imam</option>
-            {
-              postDataImam.map(imam => {
-                return(
-                  <option value={imam.id}> {imam.name}</option>
-                )
-              })
-            }
-           
-          </select>
-          <button className={styles.child30} onClick={()=>{
-          router.push(''+postData.number+'?imamId='+selectedImam)
-          }}>Ganti Imam</button>
+          <div className={styles.child70}>
+            <select  className={` ${styles.select}`} id="selectedImam" onChange={e => setSelectedImam(e.target.value)} defaultValue={imamId} >
+            <option >Pilih Imam</option>
+              {
+                postDataImam.map(imam => {
+
+                  return(
+                    <option value={imam.id} > {imam.name}</option>
+                  )
+                })
+              }
+            
+            </select>
+          </div>
+          <div className={styles.child30}>
+            <button className={styles.button} onClick={()=>{
+            router.push(''+postData.number+'?imamId='+selectedImam)
+            }}>Ganti Imam</button>
+          </div>
         </div>
+        <h2 className={styles.bismillah}>{bismillah}</h2>
         {postData.ayahs.map(ayat => {
           
           return(
             <div>
               <p className={styles.arab}>{ayat.text.ar}</p>
-              <p className={styles.baca} >{ayat.number.insurah} . {ayat.text.read}</p>
+              <p className={`${styles.baca} `} >{ayat.number.insurah} . {ayat.text.read}</p>
             </div>
           )})}
           </div>

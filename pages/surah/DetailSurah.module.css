@@ -1,3 +1,4 @@
+
 .arab{
  font-size: 40px;
  text-align:right;
@@ -14,8 +15,8 @@
 
 .title{
   text-align: center;
-  margin-top: 3em;
-  margin-bottom: 3em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .tafsir{
@@ -35,39 +36,36 @@
   width: calc(50% - 10px);
   margin-left: 10px;
   margin-top: 10px;
- 
-  
 }
 
 .child70 {
-  width: calc(70% - 10px);
-  margin-left: 10px;
-  margin-top: 10px;
+ @apply px-2 mt-2 w-full md:w-9/12 
  
 }
 
 .child30 {
-  width: calc(30% - 10px);
-  margin-left: 10px;
-  margin-top: 10px;
+  @apply  px-2 w-full md:w-3/12 
  
 }
-.select {
 
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
+.button{
+ @apply w-full py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-3xl mt-2
+}
+
+.select {
+  @apply  appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight 
 }
 
 .p1{
   padding-left: 1em;
   padding-right: 1em;
 
+}
+
+.bismillah{
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 32px;
 }
