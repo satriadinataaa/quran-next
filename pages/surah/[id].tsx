@@ -31,7 +31,7 @@ export default function detail({postData,postDataImam}) {
                 postDataImam.map(imam => {
 
                   return(
-                    <option value={imam.id} > {imam.name}</option>
+                    <option value={imam.id} key={imam.id}> {imam.name}</option>
                   )
                 })
               }
@@ -44,16 +44,18 @@ export default function detail({postData,postDataImam}) {
             }}>Ganti Imam</button>
           </div>
         </div>
-        <h2 className={styles.bismillah}>{bismillah}</h2>
-        {postData.ayahs.map(ayat => {
-          
-          return(
-            <div>
-              <p className={styles.arab}>{ayat.text.ar}</p>
-              <p className={`${styles.baca} `} >{ayat.number.insurah} . {ayat.text.read}</p>
-            </div>
-          )})}
+          <h2 className={`${styles.bismillah} my-5`}>{bismillah}</h2>
+          <div class="mt-20">
+          {postData.ayahs.map(ayat => {
+            
+            return(
+              <div key={ayat.number.insurah}>
+                <p className={`${styles.arab} mt-10`}>{ayat.text.ar}</p>
+                <p className={`${styles.baca} mt-5 leading-loose`} >{ayat.number.insurah} . {ayat.text.read}</p>
+              </div>
+            )})}
           </div>
+        </div>
     </>
      )
 }
