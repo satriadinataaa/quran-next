@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './Header.module.css'
-
+import Head from 'next/head'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
@@ -13,8 +13,14 @@ const navigation = [
 
 export default function Header() {
   return (
- 
-  
+    <>
+      <Head>
+        <title>Qur'anku</title>
+        <meta property="og:title" content="Qur'anku" key="title" />
+      </Head>
+      <Head>
+        <meta property="og:title" content="Qur'anku" key="title" />
+      </Head>
       <div className="relative z-10 pb-8 bg-white   lg:max-w-2xl lg:w-full  bg-green-50">
         <svg
           className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
@@ -109,9 +115,10 @@ export default function Header() {
             </Popover.Panel>
           </Transition>
         </Popover>
-
+    
       
     
   </div>
+  </>
   );
 }

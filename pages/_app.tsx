@@ -7,7 +7,7 @@ import Head from 'next/head'
 import NProgress from 'nprogress'
 import "tailwindcss/tailwind.css"
 Router.events.on('routeChangeStart', (url) => {
-  console.log(`Loading: ${url}`)
+  // console.log(`Loading: ${url}`)
   NProgress.start()
 })
 Router.events.on('routeChangeComplete', () => NProgress.done())

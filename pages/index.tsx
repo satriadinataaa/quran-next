@@ -1,10 +1,9 @@
 // @ts-nocheck
 import type { NextPage } from 'next';
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import React, {ChangeEvent, FormEvent, useState,useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DaftarSurah from '../components/DaftarSurah';
-import styles from '../styles/Home.module.css'
+import Footer from '../components/Footer';
+import Header from '../components/Header';
   
 const Home: NextPage = () => {
   const [ListSurah, setListSurah] = useState<any[]>([])

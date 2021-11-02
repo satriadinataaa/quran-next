@@ -1,26 +1,24 @@
 // @ts-nocheck
 
-import Header from '../../components/Header'
-import React, {ChangeEvent, FormEvent, useState,useEffect } from "react";
-import styles from './DetailSurah.module.css'
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import Header from '../../components/Header';
+import styles from './DetailSurah.module.css';
 
 export default function detail({query}) {
  
-  const [ListSurah, setListSurah] = useState<any[]>([])
-  const [Waiting, setWaiting] = useState(true)
-  const [idSurah, setidSurah] = useState("")
-  const router = useRouter();
-  const [selectedImam,setSelectedImam] = useState("");
-  const imamId = router.query.imamId;
  
+  const [Waiting, setWaiting] = useState(true)
+  const router = useRouter();
+  const [selectedImam,setSelectedImam] = useState(4);
+  const [option,setOption] = useState("");
   const [ayat,setAyat] = useState<any[]>([]);
   const [listimam,setImam] = useState<any[]>([]);
   let params = query;
   
   async function fetchData(query){
-  
-    const res =  await fetch('https://quran-endpoint.vercel.app/quran/'+query.id+'?imamId='+query.imamId);
+    
+    const res =  await fetch('https://quran-endpoint.vercel.app/quran/'+query.id+'?imamId='+selectedImam);
    
     const posts = await res.json();
     setAyat(posts.data);
@@ -32,9 +30,10 @@ export default function detail({query}) {
   }
   
   useEffect(() => {
+    setWaiting(true)
     fetchData(params)
     
-  }, [])
+  }, [selectedImam])
   // let bismillah = (postData.preBismillah) ? postData.preBismillah.text.ar : '';
   return (
     < >
@@ -47,7 +46,7 @@ export default function detail({query}) {
           <audio className={styles.audioBar} src={ayat.recitation.full} controls />
           <div className={styles.container}>
             <div className={styles.child70}>
-              <select  className={` ${styles.select}`} id="selectedImam" onChange={e => setSelectedImam(e.target.value)} defaultValue={imamId} >
+              <select  className={` ${styles.select}`} id="selectedImam" onChange={e => setOption(e.target.value)} defaultValue={selectedImam} >
               <option >Pilih Imam</option>
                 {
                   listimam.map(imam => {
@@ -62,6 +61,7 @@ export default function detail({query}) {
             </div>
             <div className={styles.child30}>
               <button className={styles.button} onClick={()=>{
+              setSelectedImam(option)
               router.push(''+ayat.number+'?imamId='+selectedImam)
               }}>Ganti Imam</button>
             </div>
