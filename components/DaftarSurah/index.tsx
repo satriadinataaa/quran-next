@@ -4,7 +4,7 @@ import styles from './Home.module.css';
 import Link from 'next/link';
 export default function DaftarSurah({Surahs}) {
   return (
-    <ul className={` ${styles.listmaster}  bg-green-50 rounded-3xl p-5 grid grid-flow-row grid-cols-1  grid-rows-3 gap-4 md:grid-cols-3` }>{Surahs.map(surah => {
+    <ul className={` ${styles.listmaster}  bg-green-50 rounded-3xl p-5 grid grid-flow-row grid-cols-1  grid-rows-3 gap-4 md:grid-cols-2 lg:grid-cols-3` }>{Surahs.map(surah => {
       let id = surah.number;
      return(
     

@@ -5,7 +5,7 @@ import React, {ChangeEvent, FormEvent, useState,useEffect } from "react";
 import styles from './DetailSurah.module.css'
 import { useRouter } from "next/router"
 
-export default function detail({postData,postDataImam}) {
+export default function detail({query}) {
  
   const [ListSurah, setListSurah] = useState<any[]>([])
   const [Waiting, setWaiting] = useState(true)
@@ -13,49 +13,73 @@ export default function detail({postData,postDataImam}) {
   const router = useRouter();
   const [selectedImam,setSelectedImam] = useState("");
   const imamId = router.query.imamId;
-
-  let bismillah = (postData.preBismillah) ? postData.preBismillah.text.ar : '';
+ 
+  const [ayat,setAyat] = useState<any[]>([]);
+  const [listimam,setImam] = useState<any[]>([]);
+  let params = query;
+  
+  async function fetchData(query){
+  
+    const res =  await fetch('https://quran-endpoint.vercel.app/quran/'+query.id+'?imamId='+query.imamId);
+   
+    const posts = await res.json();
+    setAyat(posts.data);
+    // console.log(posts)
+    const resImam = await fetch('https://quran-endpoint.vercel.app/imam');
+    const imams = await resImam.json();
+    setImam(imams.data);
+    setWaiting(false);
+  }
+  
+  useEffect(() => {
+    fetchData(params)
+    
+  }, [])
+  // let bismillah = (postData.preBismillah) ? postData.preBismillah.text.ar : '';
   return (
     < >
         <Header />
-        <div className={styles.p1}>
-        <h3 className={styles.title}>{postData.asma.id.long} - {postData.asma.translation.id} - {postData.ayahCount} Ayat - {postData.type.id} </h3>
-
-        <h5 className={styles.tafsir}>{postData.tafsir.id}</h5>
-        <audio className={styles.audioBar} src={postData.recitation.full} controls />
-        <div className={styles.container}>
-          <div className={styles.child70}>
-            <select  className={` ${styles.select}`} id="selectedImam" onChange={e => setSelectedImam(e.target.value)} defaultValue={imamId} >
-            <option >Pilih Imam</option>
-              {
-                postDataImam.map(imam => {
-
-                  return(
-                    <option value={imam.id} key={imam.id}> {imam.name}</option>
-                  )
-                })
-              }
-            
-            </select>
+        {Waiting ? <p>Mengumpulkan Data .... </p> :
+          <div className={styles.p1}> 
+          <h3 className={styles.title}>{ayat.asma.id.long} - {ayat.asma.translation.id} - {ayat.ayahCount} Ayat - {ayat.type.id} </h3>
+  
+          <h5 className={styles.tafsir}>{ayat.tafsir.id}</h5>
+          <audio className={styles.audioBar} src={ayat.recitation.full} controls />
+          <div className={styles.container}>
+            <div className={styles.child70}>
+              <select  className={` ${styles.select}`} id="selectedImam" onChange={e => setSelectedImam(e.target.value)} defaultValue={imamId} >
+              <option >Pilih Imam</option>
+                {
+                  listimam.map(imam => {
+  
+                    return(
+                      <option value={imam.id} key={imam.id}> {imam.name}</option>
+                    )
+                  })
+                }
+              
+              </select>
+            </div>
+            <div className={styles.child30}>
+              <button className={styles.button} onClick={()=>{
+              router.push(''+ayat.number+'?imamId='+selectedImam)
+              }}>Ganti Imam</button>
+            </div>
           </div>
-          <div className={styles.child30}>
-            <button className={styles.button} onClick={()=>{
-            router.push(''+postData.number+'?imamId='+selectedImam)
-            }}>Ganti Imam</button>
+            {/* <h2 className={`${styles.bismillah} my-5`}>{bismillah}</h2> */}
+            <div className="mt-20">
+            {ayat.ayahs.map(ayat => {
+              
+              return(
+                <div key={ayat.number.insurah}>
+                  <p className={`${styles.arab} mt-10`}>{ayat.text.ar}</p>
+                  <p className={`${styles.baca} mt-5 leading-loose`} >{ayat.number.insurah} . {ayat.text.read}</p>
+                </div>
+              )})}
+            </div> 
           </div>
-        </div>
-          <h2 className={`${styles.bismillah} my-5`}>{bismillah}</h2>
-          <div class="mt-20">
-          {postData.ayahs.map(ayat => {
-            
-            return(
-              <div key={ayat.number.insurah}>
-                <p className={`${styles.arab} mt-10`}>{ayat.text.ar}</p>
-                <p className={`${styles.baca} mt-5 leading-loose`} >{ayat.number.insurah} . {ayat.text.read}</p>
-              </div>
-            )})}
-          </div>
-        </div>
+        }
+       
     </>
      )
 }
@@ -96,18 +120,19 @@ export async function getServerSideProps(context) {
     // You can use any data fetching library
     // const { query } = useRouter();
     let query = context.query;
-    const res =  await fetch('https://quran-endpoint.vercel.app/quran/'+query.id+'?imamId='+query.imamId);
-    const posts = await res.json();
-    const postData = posts.data;
+    // const res =  await fetch('https://quran-endpoint.vercel.app/quran/'+query.id+'?imamId='+query.imamId);
+    // const posts = await res.json();
+    // const postData = posts.data;
 
-    const resImam = await fetch('https://quran-endpoint.vercel.app/imam');
-    const imams = await resImam.json();
-    const postDataImam = imams.data;
+    // const resImam = await fetch('https://quran-endpoint.vercel.app/imam');
+    // const imams = await resImam.json();
+    // const postDataImam = imams.data;
     // By returning { props: { posts } }, the Blog component
     // will receive `posts` as a prop at build time
     return {
       props: {
-        postData,postDataImam
+        // postData,postDataImam
+        query
       },
     }
    
