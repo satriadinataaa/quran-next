@@ -66,7 +66,7 @@ export default function detail({query}) {
               }}>Ganti Imam</button>
             </div>
           </div>
-            {/* <h2 className={`${styles.bismillah} my-5`}>{bismillah}</h2> */}
+            <h2 className={`${styles.bismillah} my-5`}>{(ayat.preBismillah)? ayat.preBismillah.text.ar : ''}</h2>
             <div className="mt-20">
             {ayat.ayahs.map(ayat => {
               
